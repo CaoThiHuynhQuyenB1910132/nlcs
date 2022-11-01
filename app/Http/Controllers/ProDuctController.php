@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DanhMuc;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class ProDuctController extends Controller
 {
@@ -27,8 +29,14 @@ class ProDuctController extends Controller
      */
     public function create()
     {
+        $danhmucs = DanhMuc::all();
 
-        return view('admin.product.create');
+        if($danhmucs->count() == 0){
+            Session::flash('info', 'Vui lòng thêm danh mục trước!');
+            return redirect()->back();
+        }
+
+        return view('admin.product.create',compact('danhmucs'));
     }
 
     /**
@@ -47,6 +55,7 @@ class ProDuctController extends Controller
                 'hinh_anh' => 'required',
                 'gia' => 'required|numeric',
                 'so_luong' => 'required|numeric',
+                'id_danhmuc' => 'required',
             ],
             [
                 'ten_sp.required' => 'Chưa nhập tên danh mục!',
@@ -55,6 +64,7 @@ class ProDuctController extends Controller
                 'hinh_anh.required' => 'Chưa nhập hình ảnh!',
                 'gia.numeric' => 'Chưa nhập giá!',
                 'so_luong.numeric' => 'Chưa nhập số lượng!',
+                'id_danhmuc.required' => 'Chưa Chọn Danh Mục!',
             ]
         );
         $sanpham = new SanPham();
@@ -69,6 +79,7 @@ class ProDuctController extends Controller
             'hinh_anh' => 'upload/' . $hinh_anh_moi,
             'gia' => $request->gia,
             'so_luong' => $request->so_luong,
+            'id_danhmuc' => $request->id_danhmuc,
         ]);
         $sanpham->save();
         Session::flash('success', 'Thêm sản phẩm thành công!');
@@ -95,8 +106,9 @@ class ProDuctController extends Controller
     public function edit($id)
     {
         $sanpham = SanPham::findOrFail($id);
+        $danhmucs = DanhMuc::all();
 
-        return view('admin.product.edit', compact('sanpham'));
+        return view('admin.product.edit', compact('sanpham','danhmucs'));
     }
 
     /**
@@ -116,6 +128,7 @@ class ProDuctController extends Controller
                 'hinh_anh' => 'required',
                 'gia' => 'required|numeric',
                 'so_luong' => 'required|numeric',
+                'id_danhmuc' => 'required',
             ],
             [
                 'ten_sp.required' => 'Chưa nhập tên danh mục!',
@@ -124,24 +137,25 @@ class ProDuctController extends Controller
                 'hinh_anh.required' => 'Chưa nhập hình ảnh!',
                 'gia.numeric' => 'Chưa nhập giá!',
                 'so_luong.numeric' => 'Chưa nhập số lượng!',
+                'id_danhmuc.required' => 'Chưa Chọn Danh Mục!',
             ]
         );
-        $sanpham = SanPham::findOrFail($id);   
-        //  $sanpham = new SanPham();
+        $sanpham = SanPham::findOrFail($id); 
+        
         $hinh_anh = $request->hinh_anh;
-
         $hinh_anh_moi = time() . $hinh_anh->getClientOriginalName();
         $hinh_anh->move('upload/', $hinh_anh_moi);
-        $sanpham = SanPham::updated([
-            'hinh_anh' => 'upload/' . $hinh_anh_moi,
-            'ten_sp' => $request->ten_sp,
-            'mo_ta' => $request->mo_ta,
-            'hinh_anh' => $request->hinh_anh,
-            'gia' => $request->gia,
-            'so_luong' => $request->so_luong,
-        ]);
 
-        // $sanpham->update();
+        $sanpham->hinh_anh='upload/'.$hinh_anh_moi;
+        $sanpham->ten_sp= $request->ten_sp;
+        $sanpham->mo_ta=$request->mo_ta;
+        $sanpham->gia=$request->gia;
+        $sanpham->id_danhmuc = $request->id_danhmuc;
+        $sanpham->so_luong=$request->so_luong;
+
+        $sanpham->save();
+
+    
         Session::flash('success', 'Cập nhật thành công!');
         return redirect()->route('sanpham.index');
     }

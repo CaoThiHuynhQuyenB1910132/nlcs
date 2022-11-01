@@ -15,5 +15,15 @@ class SanPham extends Model
         'hinh_anh',
         'gia',
         'so_luong',
+        'id_danhmuc',
     ];
+
+    public function getImageAtribute($hinh_anh)
+    {
+        return asset($hinh_anh);
+    }
+
+    public function danhmuc(){
+        return $this->belongsTo(DanhMuc::class,'id_danhmuc');
+    }
 }

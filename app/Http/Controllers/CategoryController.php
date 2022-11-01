@@ -15,9 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $danhmucs = DanhMuc::orderBy('id','desc')->paginate(4);
+        $danhmucs = DanhMuc::orderBy('id', 'desc')->paginate(4);
 
-        return view('admin.category.index',compact('danhmucs'));
+        return view('admin.category.index', compact('danhmucs'));
     }
 
     /**
@@ -52,7 +52,7 @@ class CategoryController extends Controller
         $danhmuc = new DanhMuc();
         $danhmuc->ten_danh_muc = $request->ten_danh_muc;
         $danhmuc->save();
-        Session::flash('success','Thêm danh mục thành công!');
+        Session::flash('success', 'Thêm danh mục thành công!');
         return redirect()->back();
         // dd($request->all());
     }
@@ -76,8 +76,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $danhmuc = DanhMuc::findOrFail($id);
-        
-        return view('admin.category.edit',compact('danhmuc'));
+
+        return view('admin.category.edit', compact('danhmuc'));
     }
 
     /**
@@ -103,7 +103,7 @@ class CategoryController extends Controller
         $danhmuc = DanhMuc::findOrFail($id);
         $danhmuc->ten_danh_muc = $request->ten_danh_muc;
         $danhmuc->save();
-        Session::flash('success','Cập nhật danh mục thành công!');
+        Session::flash('success', 'Cập nhật danh mục thành công!');
         return redirect()->route('danhmuc.index');
     }
 
@@ -116,8 +116,14 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $danhmuc = DanhMuc::findOrFail($id);
-        $danhmuc->delete();
-        Session::flash('success','Xóa thành công.');
-        return redirect()->route('danhmuc.index');
+        dd($danhmuc->sanphams->count());
+        // if ($danhmuc->sanphams->count() > 0) {
+        //     Session::flash('error', 'Vui lòng xóa sản phẩm liên quan!');
+        //     return redirect()->back();
+        // } else {
+        //     $danhmuc->delete();
+        //     Session::flash('success', 'Xóa thành công.');
+        //     return redirect()->route('danhmuc.index');
+        // }
     }
 }
