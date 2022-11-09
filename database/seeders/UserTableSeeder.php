@@ -19,7 +19,7 @@ class UserTableSeeder extends Seeder
             'name' => 'HuynhQuyen',
             'email' => 'quynhquyenhhn@gmail.com',
             'password' => bcrypt('quyen'),
-            'role' => 'admin',
+            'admin' => 1,
         ]);
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProDuctController;
+use App\Models\SanPham;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -56,4 +57,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
 });
 
-
+Route::get('/test', function(){
+    return SanPham::find(1)->DanhMuc;
+});

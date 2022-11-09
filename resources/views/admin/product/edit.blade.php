@@ -61,13 +61,13 @@
 
             <div class="mb-3">
                 <label for="simpleinput" class="form-label">Chọn Danh Mục</label>
-                <select class="form-control mb-3 select2" data-toggle="select2" name="id_danhmuc" id="danhmuc">
+                <select class="form-control mb-3 select2" data-toggle="select2" name="danh_muc_id" id="danhmuc">
                     @foreach ($danhmucs as $danhmuc)
                         <option value="{{ $danhmuc->id }}" @if ($sanpham->danhmuc->id == $danhmuc->id) selected @endif>
                             {{ $danhmuc->ten_danh_muc }}</option>
                     @endforeach
                 </select>
-                @error('id_danhmuc')
+                @error('danh_muc_id')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>

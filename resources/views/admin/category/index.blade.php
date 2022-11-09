@@ -28,6 +28,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Tên Danh Mục</th>
+                            <th>Sản Phẩm thuộc Danh Mục</th>
                             <th class="text-center">Chỉnh Sửa</th>
                         </tr>
                     </thead>
@@ -37,6 +38,7 @@
                                 <tr>
                                     <td>{{ $danhmuc->id }}</td>
                                     <td>{{ $danhmuc->ten_danh_muc }}</td>
+                                    <td>{{ $danhmuc->sanphams->count() }}</td>
                                     <td class="table-action text-center">
                                         <a href="{{ route('danhmuc.edit', ['id' => $danhmuc->id]) }}" class="action-icon">
                                             <i class=" uil-edit"></i></a>

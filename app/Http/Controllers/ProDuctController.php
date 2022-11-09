@@ -55,7 +55,7 @@ class ProDuctController extends Controller
                 'hinh_anh' => 'required',
                 'gia' => 'required|numeric',
                 'so_luong' => 'required|numeric',
-                'id_danhmuc' => 'required',
+                'danh_muc_id' => 'required',
             ],
             [
                 'ten_sp.required' => 'Chưa nhập tên danh mục!',
@@ -64,9 +64,10 @@ class ProDuctController extends Controller
                 'hinh_anh.required' => 'Chưa nhập hình ảnh!',
                 'gia.numeric' => 'Chưa nhập giá!',
                 'so_luong.numeric' => 'Chưa nhập số lượng!',
-                'id_danhmuc.required' => 'Chưa Chọn Danh Mục!',
+                'danh_muc_id.required' => 'Chưa Chọn Danh Mục!',
             ]
         );
+       
         $sanpham = new SanPham();
         $hinh_anh = $request->hinh_anh;
 
@@ -79,7 +80,7 @@ class ProDuctController extends Controller
             'hinh_anh' => 'upload/' . $hinh_anh_moi,
             'gia' => $request->gia,
             'so_luong' => $request->so_luong,
-            'id_danhmuc' => $request->id_danhmuc,
+            'danh_muc_id' => $request->danh_muc_id,
         ]);
         $sanpham->save();
         Session::flash('success', 'Thêm sản phẩm thành công!');
@@ -128,7 +129,7 @@ class ProDuctController extends Controller
                 'hinh_anh' => 'required',
                 'gia' => 'required|numeric',
                 'so_luong' => 'required|numeric',
-                'id_danhmuc' => 'required',
+                'danh_muc_id' => 'required',
             ],
             [
                 'ten_sp.required' => 'Chưa nhập tên danh mục!',
@@ -137,7 +138,7 @@ class ProDuctController extends Controller
                 'hinh_anh.required' => 'Chưa nhập hình ảnh!',
                 'gia.numeric' => 'Chưa nhập giá!',
                 'so_luong.numeric' => 'Chưa nhập số lượng!',
-                'id_danhmuc.required' => 'Chưa Chọn Danh Mục!',
+                'danh_muc_id.required' => 'Chưa Chọn Danh Mục!',
             ]
         );
         $sanpham = SanPham::findOrFail($id); 

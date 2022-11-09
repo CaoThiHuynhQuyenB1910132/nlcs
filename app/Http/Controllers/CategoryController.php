@@ -116,14 +116,14 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $danhmuc = DanhMuc::findOrFail($id);
-        dd($danhmuc->sanphams->count());
-        // if ($danhmuc->sanphams->count() > 0) {
-        //     Session::flash('error', 'Vui lòng xóa sản phẩm liên quan!');
-        //     return redirect()->back();
-        // } else {
-        //     $danhmuc->delete();
-        //     Session::flash('success', 'Xóa thành công.');
-        //     return redirect()->route('danhmuc.index');
-        // }
+        // dd($danhmuc->sanphams->count());
+        if ($danhmuc->sanphams->count() > 0) {
+            Session::flash('error', 'Vui lòng xóa sản phẩm liên quan!');
+            return redirect()->back();
+        } else {
+            $danhmuc->delete();
+            Session::flash('success', 'Xóa thành công.');
+            return redirect()->route('danhmuc.index');
+        }
     }
 }

@@ -15,7 +15,7 @@ class SanPham extends Model
         'hinh_anh',
         'gia',
         'so_luong',
-        'id_danhmuc',
+        'danh_muc_id',
     ];
 
     public function getImageAtribute($hinh_anh)
@@ -24,6 +24,6 @@ class SanPham extends Model
     }
 
     public function danhmuc(){
-        return $this->belongsTo(DanhMuc::class,'id_danhmuc');
+        return $this->belongsTo(DanhMuc::class,'danh_muc_id');
     }
 }

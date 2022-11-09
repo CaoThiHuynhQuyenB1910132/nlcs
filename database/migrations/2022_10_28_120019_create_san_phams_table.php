@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('san_phams', function (Blueprint $table) {
             $table->id();
             
-            $table->integer('id_danhmuc');
+            $table->integer('danh_muc_id');
 
             $table->string('ten_sp');
             $table->longText('mo_ta');
