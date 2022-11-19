@@ -3,6 +3,8 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProDuctController;
+use App\Http\Controllers\User\HomeController as UserHomeController;
+use App\Models\DanhMuc;
 use App\Models\SanPham;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -57,6 +59,19 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
 });
 
-Route::get('/test', function(){
-    return SanPham::find(1)->DanhMuc;
+// Giao Dien Nguoi Dung
+
+Route::get('/',[UserHomeController::class, 'index'])->name('index');
+
+Route::get('/san-pham/{id}',[UserHomeController::class, 'productDetail'])->name('productDetail');
+
+Route::get('/san-pham',[UserHomeController::class, 'showAll'])->name('showAll');
+
+Route::get('/san-pham/danh-muc/{id}',[UserHomeController::class, 'spDanhMuc'])->name('spDanhMuc');
+
+Route::get('/ket-qua', function () {
+    $sanphams = SanPham::orderBy('created_at', 'desc')->where('ten_sp', 'like', '%' . request('query') . '%')
+    ->paginate(10);
+    $danhmucs = DanhMuc::all();
+    return view('client.product.result', compact('sanphams','danhmucs'))->with('query', request('query'));
 });

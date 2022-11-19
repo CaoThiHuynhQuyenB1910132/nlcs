@@ -151,7 +151,7 @@ class ProDuctController extends Controller
         $sanpham->ten_sp= $request->ten_sp;
         $sanpham->mo_ta=$request->mo_ta;
         $sanpham->gia=$request->gia;
-        $sanpham->id_danhmuc = $request->id_danhmuc;
+        $sanpham->danh_muc_id = $request->danh_muc_id;
         $sanpham->so_luong=$request->so_luong;
 
         $sanpham->save();
