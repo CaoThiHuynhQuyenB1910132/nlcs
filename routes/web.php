@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProDuctController;
@@ -75,3 +76,10 @@ Route::get('/ket-qua', function () {
     $danhmucs = DanhMuc::all();
     return view('client.product.result', compact('sanphams','danhmucs'))->with('query', request('query'));
 });
+
+// Gio hang 
+ 
+Route::get('cart', [CartController::class, 'cart'])->name('cart');
+Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
+Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
+Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove.from.cart');

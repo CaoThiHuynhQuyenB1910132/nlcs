@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DanhMuc;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
@@ -13,6 +14,11 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index()
     {
         $danhmucs = DanhMuc::orderBy('id', 'desc')->paginate(4);
@@ -96,7 +102,7 @@ class CategoryController extends Controller
             ],
             [
                 'ten_danh_muc.required' => 'Chưa nhập tên danh mục!',
-                'ten_danh_muc.unique' => 'Tên danh mục đã tồn tại, vui lò2ng nhập tên khác!'
+                'ten_danh_muc.unique' => 'Tên danh mục đã tồn tại, vui lòng nhập tên khác!'
 
             ]
         );

@@ -27,6 +27,8 @@
                             <span class="account-position">
                                 @if (Auth::user()->admin)
                                     Quản Trị Viên!
+                                    @else
+                                    Người dùng
                                 @endif
 
                             </span>

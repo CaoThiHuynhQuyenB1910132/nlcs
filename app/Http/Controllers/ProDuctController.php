@@ -16,6 +16,10 @@ class ProDuctController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
     public function index()
     {
         $sanphams = SanPham::orderBy('id', 'desc')->paginate(4);
@@ -179,4 +183,6 @@ class ProDuctController extends Controller
         Session::flash('success', 'Xóa thành công.');
         return redirect()->route('sanpham.index');
     }
+
+    
 }

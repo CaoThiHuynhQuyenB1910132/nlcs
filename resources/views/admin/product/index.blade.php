@@ -62,3 +62,20 @@
         </div>
     </div>
 @endsection
+@section('script')
+    <script>
+        /* Delete confirmation script */
+        $('#confirm-delete').on(
+            'show.bs.modal',
+            function(e) {
+                $(this).find('#confirm-header').text(
+                    "Xác nhận xóa \"" +
+                    $(e.relatedTarget).data('label') +
+                    "\"");
+                $(this).find('.btn-ok').attr(
+                    'href',
+                    '/sanpham/delete/' +
+                    ;
+            });
+    </script>
+@endsection

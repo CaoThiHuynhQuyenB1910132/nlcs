@@ -1,7 +1,7 @@
 <div class="leftside-menu">
     
     <!-- LOGO -->
-    <a href="index.html" class="logo text-center logo-light">
+    <a href="{{route('home')}}" class="logo text-center logo-light">
         <span class="logo-lg">
             <img src="admin/assets/images/logo.png" alt="" height="16">
         </span>
@@ -11,7 +11,7 @@
     </a>
 
     <!-- LOGO -->
-    <a href="index.html" class="logo text-center logo-dark">
+    <a href="{{route('home')}}" class="logo text-center logo-dark">
         <span class="logo-lg">
             <img src="admin/assets/images/logo-dark.png" alt="" height="16">
         </span>
@@ -24,11 +24,12 @@
 
         <!--- Sidemenu -->
         <ul class="side-nav">
-
+            @if (Auth::user()->admin)
+                
             <li class="side-nav-title side-nav-item">Trang Chủ</li>
 
             <li class="side-nav-item">
-                <a href="apps-calendar.html" class="side-nav-link">
+                <a href="{{route('home')}}" class="side-nav-link">
                     <i class="uil-home-alt"></i>
                     <span> Trang Chủ </span>
                 </a>
@@ -46,6 +47,14 @@
                 <a href="{{route('sanpham.index')}}" class="side-nav-link">
                     <i class=" uil-store"></i>
                     <span>Sản Phẩm</span>
+                </a>
+            </li>
+            @endif
+
+            <li class="side-nav-item">
+                <a href="" class="side-nav-link">
+                    <i class="uil-bag-alt"></i>
+                    <span> Đơn hàng </span>
                 </a>
             </li>
         </ul>

@@ -11,7 +11,7 @@
                             <li class="breadcrumb-item active">Thêm danh mục</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Thêm danh mục</h4>
+                    <h4 class="page-title">Chỉnh sửa danh mục</h4>
                 </div>
             </div>
         </div>

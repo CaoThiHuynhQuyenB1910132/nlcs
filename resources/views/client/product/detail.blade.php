@@ -12,17 +12,12 @@
           <p><strong class="text-primary h4">{{$chitiet_sp->gia}} VNĐ</strong></p>
           <div class="mb-5">
             <div class="input-group mb-3" style="max-width: 120px;">
-            <div class="input-group-prepend">
-              <button class="btn btn-outline-primary js-btn-minus" type="button">−</button>
-            </div>
             <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-            <div class="input-group-append">
-              <button class="btn btn-outline-primary js-btn-plus" type="button">+</button>
-            </div>
+
           </div>
 
           </div>    
-          <p><a href="cart.html" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
+          <p><a href="{{ route('add.to.cart', $chitiet_sp->id) }}" class="buy-now btn btn-sm btn-primary">Thêm vào giỏ hàng</a></p>
 
         </div>
       </div>
